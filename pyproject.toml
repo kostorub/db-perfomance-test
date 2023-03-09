@@ -1,0 +1,32 @@
+#[build-system]
+#requires = ["hatchling"]
+#build-backend = "hatchling.build"
+
+[project]
+name = "db-perfomance-test"
+version = "0.0.1"
+authors = [
+  { name="Vasilii Kostrubov", email="vs.kostrubov@gmail.com" }
+]
+description = "A small perfomance banchmark package"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "sqlalchemy",
+    "psycopg2-binary; python_implementation == 'CPython'",
+    "pg8000; python_implementation == 'PyPy'",
+    "fastapi",
+    "uvicorn[standard]",
+    "black",
+    "isort"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/kostorub/db-perfomance-test"
+"Bug Tracker" = "https://github.com/kostorub/db-perfomance-test/issues"
