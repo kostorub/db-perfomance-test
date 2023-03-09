@@ -1,7 +1,7 @@
 from collections import defaultdict
 from enum import Enum
 from time import time
-from typing import List
+from typing import Dict, List
 
 from sqlalchemy import Engine, func, select
 from sqlalchemy.orm import Session
@@ -25,7 +25,7 @@ def get_protocol_tokens(engine: Engine) -> List[Token]:
 
 
 @timeitit
-def get_protocol_estimation(engine: Engine) -> float:
+def get_protocol_estimation(engine: Engine) -> int:
     with Session(engine) as session:
         sub_query = (
             select(
@@ -44,7 +44,11 @@ def get_protocol_estimation(engine: Engine) -> float:
 
 
 @timeitit
-def get_portfolio_timeline(engine: Engine, period: Period):
+def get_portfolio_timeline(engine: Engine, period: Period) -> Dict[int, int]:
+    """
+    Return a dict where key is a timestamp and a value is an amount_usd sum
+    {1678147200: Decimal('10000'), 1678233600: 0, 1678320000: Decimal('10000')}
+    """
     time_to = int(time()) // 60 * 60
     # time_to = 1678384923
     if period == Period.HOUR:
@@ -89,8 +93,14 @@ if __name__ == "__main__":
     if not check_content(engine):
         init_db(engine)
 
-    print("get_protocol_tokens", get_protocol_tokens(engine))
-    print("get_protocol_estimation", get_protocol_estimation(engine))
-    print("Period.HOUR", get_portfolio_timeline(engine, Period.HOUR))
-    print("Period.DAY", get_portfolio_timeline(engine, Period.DAY))
-    print("Period.MONTH", get_portfolio_timeline(engine, Period.MONTH))
+    result_1 = get_protocol_tokens(engine)
+    result_2 = get_protocol_estimation(engine)
+    result_3 = get_portfolio_timeline(engine, Period.HOUR)
+    result_4 = get_portfolio_timeline(engine, Period.DAY)
+    result_5 = get_portfolio_timeline(engine, Period.MONTH)
+
+    print("get_protocol_tokens", result_1)
+    print("get_protocol_estimation", result_2)
+    print("Period.HOUR", result_3)
+    print("Period.DAY", result_4)
+    print("Period.MONTH", result_5)
