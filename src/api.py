@@ -18,14 +18,14 @@ class Period(Enum):
 
 
 @timeitit
-def get_protocol_tokens(engine: Engine) -> List[Token]:
+def get_protocol_tokens(engine: Engine, protocol_id: int) -> List[Token]:
     with Session(engine) as session:
-        query = select(Token).join(ProtocolToken).where(ProtocolToken.protocol_id == 1)
+        query = select(Token).join(ProtocolToken).where(ProtocolToken.protocol_id == protocol_id)
         return list(session.scalars(query))
 
 
 @timeitit
-def get_protocol_estimation(engine: Engine) -> int:
+def get_protocol_estimation(engine: Engine, protocol_id: int) -> int:
     with Session(engine) as session:
         sub_query = (
             select(
@@ -36,7 +36,7 @@ def get_protocol_estimation(engine: Engine) -> int:
                 .label("row_number"),
             )
             .join(ProtocolToken)
-            .where(ProtocolToken.protocol_id == 1)
+            .where(ProtocolToken.protocol_id == protocol_id)
         )
         query = select(func.sum(sub_query.c.amount_usd)).where(sub_query.c.row_number == 1)
         result = sum(list(session.scalars(query)))
@@ -44,7 +44,7 @@ def get_protocol_estimation(engine: Engine) -> int:
 
 
 @timeitit
-def get_portfolio_timeline(engine: Engine, period: Period) -> Dict[int, int]:
+def get_portfolio_timeline(engine: Engine, protocol_id: int, period: Period) -> Dict[int, int]:
     """
     Return a dict where key is a timestamp and a value is an amount_usd sum
     {1678147200: Decimal('10000'), 1678233600: 0, 1678320000: Decimal('10000')}
@@ -93,11 +93,11 @@ if __name__ == "__main__":
     if not check_content(engine):
         init_db(engine)
 
-    result_1 = get_protocol_tokens(engine)
-    result_2 = get_protocol_estimation(engine)
-    result_3 = get_portfolio_timeline(engine, Period.HOUR)
-    result_4 = get_portfolio_timeline(engine, Period.DAY)
-    result_5 = get_portfolio_timeline(engine, Period.MONTH)
+    result_1 = get_protocol_tokens(engine, 1)
+    result_2 = get_protocol_estimation(engine, 1)
+    result_3 = get_portfolio_timeline(engine, 1, Period.HOUR)
+    result_4 = get_portfolio_timeline(engine, 1, Period.DAY)
+    result_5 = get_portfolio_timeline(engine, 1, Period.MONTH)
 
     print("get_protocol_tokens", result_1)
     print("get_protocol_estimation", result_2)
