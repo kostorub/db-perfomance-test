@@ -90,7 +90,8 @@ def get_portfolio_timeline(engine: Engine, protocol_id: int, period: Period) -> 
 
 
 @timeitit
-def get_top_accounts(engine: Engine, protocol_id: int) -> Dict[str, int]:
+def get_top_accounts(engine: Engine, protocol_id: int) -> List[str, int]:
+    """ Return [(1, Decimal('2900')), (3, Decimal('2000')), (64, Decimal('2000'))]"""
     with Session(engine) as session:
         subquery_1 = select(TokenPrice.protocol_token_id, func.max(TokenPrice.created_at).label("max_created_at"))\
             .group_by(TokenPrice.protocol_token_id)\
