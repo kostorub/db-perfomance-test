@@ -6,6 +6,7 @@ from sqlalchemy import Engine, create_engine, select
 from sqlalchemy.orm import Session
 
 from models.data import Account, AccountBalance, Base, Protocol, ProtocolToken, Token, TokenPrice, Tvl
+from utils import timeitit
 
 if platform.python_implementation() == "CPython":
     db_connector_prefix = "postgresql+psycopg2"
@@ -34,6 +35,7 @@ def init_db(engine: Engine):
         add_accounts_and_balances(session)
 
 
+@timeitit
 def add_protocols_and_tokens(session: Session) -> None:
     protocol = Protocol(name="Uniswapv3")
     current_time = int(time())
@@ -68,6 +70,7 @@ def add_history_data(protocol_token: ProtocolToken, time_value: int):
     protocol_token.tvls.append(tvl)
 
 
+@timeitit
 def add_accounts_and_balances(session: Session) -> None:
     accounts = []
     for i in range(ACCOUNT_NUMBER):
@@ -77,7 +80,7 @@ def add_accounts_and_balances(session: Session) -> None:
                 AccountBalance(protocol_token_id=randint(1, TOKEN_NUMBER), amount=10, created_at_block=0)
             )
         accounts.append(account)
-        if len(accounts) >= 10000:
+        if len(accounts) >= 1000:
             session.add_all(accounts)
             session.commit()
             accounts.clear()

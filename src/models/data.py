@@ -32,8 +32,8 @@ class ProtocolToken(Base):
     __tablename__ = "protocol_token"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    token_id: Mapped[int] = mapped_column(ForeignKey("token.id"))
-    protocol_id: Mapped[int] = mapped_column(ForeignKey("protocol.id"))
+    token_id: Mapped[int] = mapped_column(ForeignKey("token.id"), index=True)
+    protocol_id: Mapped[int] = mapped_column(ForeignKey("protocol.id"), index=True)
 
     protocol: Mapped[Protocol] = relationship(back_populates="tokens")
     token: Mapped[Token] = relationship(back_populates="protocols")
@@ -47,7 +47,7 @@ class Account(Base):
     __tablename__ = "account"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    wallet_address: Mapped[str] = mapped_column(String(30))
+    wallet_address: Mapped[str] = mapped_column(String(30), index=True)
 
     account_balances: Mapped[List["AccountBalance"]] = relationship(back_populates="accounts")
 
@@ -56,10 +56,10 @@ class AccountBalance(Base):
     __tablename__ = "account_balance"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    protocol_token_id: Mapped[int] = mapped_column(ForeignKey("protocol_token.id"))
+    protocol_token_id: Mapped[int] = mapped_column(ForeignKey("protocol_token.id"), index=True)
     protocol_tokens: Mapped[List[ProtocolToken]] = relationship(back_populates="account_balances")
     amount: Mapped[int] = mapped_column(BigInteger)
-    account_id: Mapped[int] = mapped_column(ForeignKey("account.id"))
+    account_id: Mapped[int] = mapped_column(ForeignKey("account.id"), index=True)
     accounts: Mapped[List[Account]] = relationship(back_populates="account_balances")
     created_at_block: Mapped[int]
 
@@ -68,7 +68,7 @@ class TokenPrice(Base):
     __tablename__ = "token_price"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    protocol_token_id: Mapped[int] = mapped_column(ForeignKey("protocol_token.id"))
+    protocol_token_id: Mapped[int] = mapped_column(ForeignKey("protocol_token.id"), index=True)
     usd_price: Mapped[int] = mapped_column(Numeric)
     created_at: Mapped[int]
 

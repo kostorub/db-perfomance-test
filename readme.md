@@ -27,7 +27,7 @@ On my machine I have
     Timeitit <get_portfolio_timeline>: 0.06346869468688965 sec # Period.HOUR
     Timeitit <get_portfolio_timeline>: 0.07407307624816895 sec # Period.DAY
     Timeitit <get_portfolio_timeline>: 0.04651594161987305 sec # Period.MONTH
-    Timeitit <get_top_accounts>: 171.3708782196045 sec
+    Timeitit <get_top_accounts>: 254.63567757606506 sec
 
 # Architecture 
 
@@ -37,6 +37,9 @@ On my machine I have
 
 ## Alternative view
 
-We can store the latest actual data in a separate tables to improve the perfomance of top 100 accounts calculation.
-
 ![Alt text](https://github.com/kostorub/db-perfomance-test/blob/main/img/Screenshot%202023-03-10%20204201.png "Alternative structure")
+
+Suggestions  
+- To store the latest actual data in separate tables to improve the performance of top 100 accounts calculation
+- To store an amount_usd in the AccountBalance current table and update it periodically
+- Not to store all of the 1kk+ accounts in one table, probably separate them onto different DB
