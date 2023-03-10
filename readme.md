@@ -33,6 +33,6 @@ On my machine I have
 
 ## Current view
 
-![Alt text]('./img/Screenshot 2023-03-10 203127.png' "Current view")
+![Alt text](https://github.com/kostorub/db-perfomance-test/blob/main/img/Screenshot%202023-03-10%20203127.png "Current view")
 
 ## Alternative view
