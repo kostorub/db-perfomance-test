@@ -27,3 +27,12 @@ On my machine I have
     Timeitit <get_portfolio_timeline>: 0.06346869468688965 sec # Period.HOUR
     Timeitit <get_portfolio_timeline>: 0.07407307624816895 sec # Period.DAY
     Timeitit <get_portfolio_timeline>: 0.04651594161987305 sec # Period.MONTH
+    Timeitit <get_top_accounts>: 171.3708782196045 sec
+
+# Architecture 
+
+# Current view
+
+![Alt text](img/Screenshot 2023-03-10 203127.png "Title")
+
+# Alternative view
