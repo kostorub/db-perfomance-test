@@ -31,8 +31,8 @@ On my machine I have
 
 # Architecture 
 
-# Current view
+## Current view
 
-![Alt text](img/Screenshot 2023-03-10 203127.png "Title")
+![Alt text]('./img/Screenshot 2023-03-10 203127.png' "Current view")
 
-# Alternative view
+## Alternative view
