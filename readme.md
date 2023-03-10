@@ -33,6 +33,10 @@ On my machine I have
 
 ## Current view
 
-![Alt text](https://github.com/kostorub/db-perfomance-test/blob/main/img/Screenshot%202023-03-10%20203127.png "Current view")
+![Alt text](https://github.com/kostorub/db-perfomance-test/blob/main/img/Screenshot%202023-03-10%20203127.png "Current structure")
 
 ## Alternative view
+
+We can store the latest actual data in a separate tables to improve the perfomance of top 100 accounts calculation.
+
+![Alt text](https://github.com/kostorub/db-perfomance-test/blob/main/img/Screenshot%202023-03-10%20204201.png "Alternative structure")
