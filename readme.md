@@ -19,7 +19,7 @@ Use either CPython interpreter or PyPy for the best perfomance
 
 For basic benchmarks use
 
-    python3 ./src/api.py
+    python3 ./src/run_local.py
 
 On my machine I have
 

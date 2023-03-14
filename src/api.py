@@ -1,7 +1,7 @@
 from collections import defaultdict
 from enum import Enum
 from time import time
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 from sqlalchemy import Engine, func, select, text, desc, and_
 from sqlalchemy.orm import Session
@@ -90,7 +90,7 @@ def get_portfolio_timeline(engine: Engine, protocol_id: int, period: Period) -> 
 
 
 @timeitit
-def get_top_accounts(engine: Engine, protocol_id: int) -> List[str, int]:
+def get_top_accounts(engine: Engine, protocol_id: int) -> List[Tuple[int, int]]:
     """ Return [(1, Decimal('2900')), (3, Decimal('2000')), (64, Decimal('2000'))]"""
     with Session(engine) as session:
         subquery_1 = select(TokenPrice.protocol_token_id, func.max(TokenPrice.created_at).label("max_created_at"))\
@@ -130,31 +130,3 @@ def get_top_accounts_view(engine: Engine, protocol_id: int) -> Dict[str, int]:
         db_result = session.execute(query)
 
     return list(db_result)
-    
-
-if __name__ == "__main__":
-    if not check_content(engine):
-        init_db(engine)
-
-    result_1 = get_protocol_tokens(engine, 1)
-    result_2 = get_protocol_estimation(engine, 1)
-    result_3 = get_portfolio_timeline(engine, 1, Period.HOUR)
-    result_4 = get_portfolio_timeline(engine, 1, Period.DAY)
-    result_5 = get_portfolio_timeline(engine, 1, Period.MONTH)
-    result_6 = get_top_accounts(engine, 1)
-    # result_7 = get_top_accounts_view(engine, 1)
-
-    print("get_protocol_tokens", result_1)
-    print("get_protocol_estimation", result_2)
-    print("Period.HOUR", result_3)
-    print("Period.DAY", result_4)
-    print("Period.MONTH", result_5)
-    print("get_top_accounts", result_6)
-    # print("get_top_accounts_view", result_7)
-
-    # result_1 = get_protocol_tokens(engine, 1)
-    # result_2 = get_protocol_estimation(engine, 1)
-    # result_3 = get_portfolio_timeline(engine, 1, Period.HOUR)
-    # result_4 = get_portfolio_timeline(engine, 1, Period.DAY)
-    # result_5 = get_portfolio_timeline(engine, 1, Period.MONTH)
-    # result_6 = get_top_accounts(engine, 1)
