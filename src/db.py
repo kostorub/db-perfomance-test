@@ -5,7 +5,8 @@ from time import time
 from sqlalchemy import Engine, create_engine, select
 from sqlalchemy.orm import Session
 
-from models.data import Account, AccountBalance, Base, Protocol, ProtocolToken, Token, TokenPrice, Tvl
+from models.data import (Account, AccountBalance, Base, Protocol,
+                         ProtocolToken, Token, TokenPrice, Tvl)
 from utils import timeitit
 
 if platform.python_implementation() == "CPython":

@@ -1,6 +1,6 @@
-from api import Period, get_portfolio_timeline, get_protocol_estimation, get_protocol_tokens, get_top_accounts
-from db import check_content, init_db, engine
-
+from api import (Period, get_portfolio_timeline, get_protocol_estimation,
+                 get_protocol_tokens, get_top_accounts)
+from db import check_content, engine, init_db
 
 if __name__ == "__main__":
     if not check_content(engine):
