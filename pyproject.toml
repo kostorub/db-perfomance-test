@@ -24,7 +24,8 @@ dependencies = [
     "fastapi",
     "uvicorn[standard]",
     "black",
-    "isort"
+    "isort",
+    "clickhouse-connect"
 ]
 
 [project.urls]
