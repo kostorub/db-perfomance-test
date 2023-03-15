@@ -29,7 +29,7 @@ On my machine I have
     Timeitit <get_portfolio_timeline>: 0.04651594161987305 sec # Period.MONTH
     Timeitit <get_top_accounts>: 254.63567757606506 sec
 
-[Explain of get_top_accounts](https://explain.tensor.ru/archive/explain/36aff347c9c4f5c98c32ebe2051a8c85:0:2023-03-10#explain "Explain of get_top_accounts")
+[Explain analyze of get_top_accounts](https://explain.tensor.ru/archive/explain/c1a534ee44f4273beb334584374b00ac:0:2023-03-15 "Explain of get_top_accounts")
 
 # Architecture 
 
